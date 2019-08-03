@@ -76,4 +76,40 @@ const sortBy = property => {
     a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
 };
 
-export { forEach, forEachObj, unless, times, every, some, sortBy };
+const tap = value => fn => typeof fn === "function" && fn(value);
+
+/**
+ * 接收一个给定的多参数函数，并把它转换为一个只接受一个参数的函数
+ * @param {*} fn
+ */
+const unary = fn => (fn.length === 1 ? fn : arg => fn(arg));
+
+/**
+ * 只需要运行一次给定函数
+ * @param {*} fn
+ */
+const once = fn => {
+  let done = false;
+  return function() {
+    return done ? undefined : ((done = true), fn.apply(this, arguments));
+  };
+};
+
+const memoized = fn => {
+  const lookupTable = [];
+  return arg => lookupTable[arg] || (lookupTable[arg] = fn(arg));
+};
+
+export {
+  forEach,
+  forEachObj,
+  unless,
+  times,
+  every,
+  some,
+  sortBy,
+  tap,
+  unary,
+  once,
+  memoized
+};
