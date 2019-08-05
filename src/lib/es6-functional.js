@@ -191,6 +191,33 @@ const arrayUtils = {
   zip
 };
 
+/**
+ * 柯里化
+ * @param {*} binaryFn
+ */
+const curry = binaryFn => {
+  return function(firstArg) {
+    return function(secondArg) {
+      return binaryFn(firstArg, secondArg);
+    };
+  };
+};
+
+const curryN = fn => {
+  if (typeof fn !== "function") {
+    throw Error("No function provided");
+  }
+
+  return function curriedFn(...args) {
+    if (args.length < fn.length) {
+      return function() {
+        return curriedFn.apply(null, args.concat([].slice.call(arguments)));
+      };
+    }
+    return fn.apply(null, args);
+  };
+};
+
 export {
   forEachObj,
   unless,
@@ -200,5 +227,7 @@ export {
   unary,
   once,
   memoized,
-  arrayUtils
+  arrayUtils,
+  curry,
+  curryN
 };

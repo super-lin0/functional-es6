@@ -1,5 +1,5 @@
 import React from "react";
-import "./chapter-05/play.js";
+import "./chapter-06/play.js";
 
 function App() {
   return <div className="App">Hello World</div>;
