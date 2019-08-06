@@ -218,6 +218,24 @@ const curryN = fn => {
   };
 };
 
+/**
+ * 偏函数
+ * @param {*} fn
+ * @param  {...any} partialArgs
+ */
+const partial = function(fn, ...partialArgs) {
+  let args = partialArgs.slice(0);
+  return function(...fullArguments) {
+    let arg = 0;
+    for (let i = 0; i < args.length && arg < fullArguments.length; i++) {
+      if (args[i] === undefined) {
+        args[i] = fullArguments[arg++];
+      }
+    }
+    return fn.apply(this, args);
+  };
+};
+
 export {
   forEachObj,
   unless,
@@ -229,5 +247,6 @@ export {
   memoized,
   arrayUtils,
   curry,
-  curryN
+  curryN,
+  partial
 };
