@@ -236,6 +236,26 @@ const partial = function(fn, ...partialArgs) {
   };
 };
 
+/**
+ * 函数式组合
+ * @param {Function} f1
+ * @param {Function} f2
+ */
+const compose = (f1, f2) => x => f1(f2(x));
+
+/**
+ * 多个函数组合
+ * @param  {...any} fns
+ */
+const composeN = (...fns) => value =>
+  reduce(fns.reverse(), (acc, fn) => fn(acc), value);
+
+/**
+ * 管道函数，与组合函数作用相似，只不过处理数据流是从左至右的处理，左边的函数先处理
+ * @param  {...any} fns
+ */
+const pipe = (...fns) => value => reduce(fns, (acc, fn) => fn(acc), value);
+
 export {
   forEachObj,
   unless,
@@ -248,5 +268,8 @@ export {
   arrayUtils,
   curry,
   curryN,
-  partial
+  partial,
+  compose,
+  composeN,
+  pipe
 };
