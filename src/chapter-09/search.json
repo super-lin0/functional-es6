@@ -1,0 +1,24 @@
+{
+  "kind": "Listing",
+  "data": {
+    "facets": {},
+    "modhash": "",
+    "children": [
+      {
+        "kind": "t3",
+        "data": {
+          "url": "xxx1",
+          "permalink": "/r/compsce/2",
+          "title": "testa"
+        }
+      },
+      {
+        "data": {
+          "url": "xxx2",
+          "permalink": "/r/compsce/1",
+          "title": "testb"
+        }
+      }
+    ]
+  }
+}
